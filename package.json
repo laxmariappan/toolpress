@@ -1,0 +1,28 @@
+{
+  "name": "toolpress",
+  "version": "1.0.0",
+  "description": "List of tools",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "Lax",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.4.11",
+    "axios": "^0.21.4",
+    "graphql": "^15.5.3",
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tailwind": "^4.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.15"
+  }
+}
