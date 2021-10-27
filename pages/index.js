@@ -1,33 +1,54 @@
 import "tailwindcss/tailwind.css";
 import Tool from "../components/Tool";
-import Search from "../components/SearchInput";
 import client from "../apollo-client";
 import { gql } from "@apollo/client";
 import React from "react";
 
-import { useSearchInput } from "../hooks/useSearchInput";
+import { SearchInput, SelectFilter } from "../components";
+import { useSearchInput, useDropdown } from "../hooks";
 
-export default function Home({ posts }) {
+export default function Home({ posts, categories }) {
   const { keyword, handleChange } = useSearchInput();
+  const { selected: selectedCategory, handleSelectChange } = useDropdown();
 
-  const filteredPosts = posts.filter((post) =>
-    post.node.title?.toLowerCase().includes(keyword?.toLowerCase())
-  );
+  let filteredPosts = posts.filter((post) => {
+    let filterResults = [];
+
+    if (keyword) {
+      filterResults.push(
+        !!post.title.toLowerCase().includes(keyword.toLowerCase())
+      );
+    }
+
+    if (selectedCategory) {
+      filterResults.push(
+        !!post.categories.nodes.find(
+          (category) => category.categoryId === +selectedCategory
+        )
+      );
+    }
+
+    return filterResults.every((result) => result === true);
+  });
 
   return (
     <>
       <div className="container mx-auto px-4" id="content">
         <section className="text-blueGray-700 ">
           <div className="container items-center px-5 py-8 mx-auto lg:px-24">
-            <Search keyword={keyword} handleChange={handleChange} />
+            <SearchInput keyword={keyword} handleChange={handleChange} />
+            <SelectFilter
+              categories={categories}
+              handleSelectChange={handleSelectChange}
+            />
 
             <div className="flex flex-wrap mb-12 text-left">
               {filteredPosts.map((post) => {
                 return (
                   <Tool
-                    key={post.node.id}
-                    name={post.node.title}
-                    image={post.node.featuredImage}
+                    key={post.id}
+                    name={post.title}
+                    image={post.featuredImage}
                   />
                 );
               })}
@@ -44,30 +65,32 @@ export async function getStaticProps() {
     query: gql`
       query MyQuery {
         posts {
-          edges {
-            node {
-              id
-              categories {
-                edges {
-                  node {
-                    categoryId
-                    name
-                    slug
-                  }
-                }
-              }
-              title(format: RENDERED)
-              featuredImage {
-                node {
-                  mediaDetails {
-                    file
-                    height
-                    width
-                  }
-                  sourceUrl(size: LARGE)
-                }
+          nodes {
+            id
+            categories {
+              nodes {
+                categoryId
+                name
+                slug
               }
             }
+            title(format: RENDERED)
+            featuredImage {
+              node {
+                mediaDetails {
+                  file
+                  height
+                  width
+                }
+                sourceUrl(size: LARGE)
+              }
+            }
+          }
+        }
+        categories {
+          nodes {
+            categoryId
+            name
           }
         }
       }
@@ -76,7 +99,8 @@ export async function getStaticProps() {
   // console.log(result.data.posts.edges);
   return {
     props: {
-      posts: result.data.posts.edges,
+      posts: result.data.posts.nodes,
+      categories: result.data.categories.nodes,
     },
   };
 }
