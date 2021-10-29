@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 const Tool = function (props) {
   return (
     <>
@@ -24,18 +23,19 @@ const Tool = function (props) {
             className="mx-auto text-base font-medium leading-relaxed text-blueGray-700 "
             dangerouslySetInnerHTML={{ __html: props.excerpt }}
           ></div>
+          <a
+            href="#"
+            className="inline-flex items-center mt-auto font-semibold text-blue-600 lg:mb-0 hover:text-black "
+            title="read more"
+          >
+            {" "}
+            Read More »{" "}
+          </a>
           <Link href={`p/${props.id}`}>
-            <a
-              className="inline-flex items-center mt-auto font-semibold text-blue-600 lg:mb-0 hover:text-black "
-              title="read more"
-            >
-              Read More »
-            </a>
           </Link>
         </div>
       </div>
     </>
   );
 };
-2;
 export default Tool;
