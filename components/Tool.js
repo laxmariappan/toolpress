@@ -1,3 +1,4 @@
+import Link from "next/link";
 const Tool = function (props) {
   return (
     <>
@@ -30,6 +31,8 @@ const Tool = function (props) {
             {" "}
             Read More »{" "}
           </a>
+          <Link href={`p/${props.id}`}>
+          </Link>
         </div>
       </div>
     </>

@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import Tool from "components/Tool";
 import client from "config/apollo-client";
+
 import { gql } from "@apollo/client";
 import React from "react";
 
@@ -49,6 +50,7 @@ export default function Home({ posts, categories }) {
                     key={post.id}
                     name={post.title}
                     image={post.featuredImage}
+                    id={post.id}
                   />
                 );
               })}
