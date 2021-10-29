@@ -1,5 +1,7 @@
+import { APP_BASE_URL } from "config";
+
 export default function (req, res) {
-  fetch("http://react.test/wp-json/wp/v2/posts", {
+  fetch(`${APP_BASE_URL}/wp-json/wp/v2/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
-import Tool from "../components/Tool";
-import client from "../apollo-client";
+import Tool from "components/Tool";
+import client from "config/apollo-client";
 import { gql } from "@apollo/client";
 import React from "react";
 

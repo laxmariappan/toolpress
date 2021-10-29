@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
-import Layout from "../components/Layout";
-import Tool from "../components/Tool";
+import Layout from "components/Layout";
+import Tool from "components/Tool";
 import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client";
 
 const MYPOSTS = gql`

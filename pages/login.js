@@ -5,7 +5,7 @@ const loginData = {
   password: "admin",
 };
 axios
-  .post("http://react.test/wp-json/jwt-auth/v1/token", loginData)
+  .post(`${APP_BASE_URL}/wp-json/jwt-auth/v1/token`, loginData)
   .then((res) => {
     console.log(res.data);
 
