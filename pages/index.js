@@ -1,4 +1,3 @@
-import "tailwindcss/tailwind.css";
 import Tool from "../components/Tool";
 import client from "../apollo-client";
 import { gql } from "@apollo/client";
@@ -49,6 +48,7 @@ export default function Home({ posts, categories }) {
                     key={post.id}
                     name={post.title}
                     image={post.featuredImage}
+                    id={post.id}
                   />
                 );
               })}
