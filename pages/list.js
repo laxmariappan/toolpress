@@ -1,11 +1,10 @@
+import "tailwindcss/tailwind.css";
+import Layout from "../components/Layout";
+import Tool from "../components/Tool";
+import { ApolloClient, InMemoryCache, useQuery, gql } from "@apollo/client";
 
-import 'tailwindcss/tailwind.css'
-import Layout from '../components/Layout'
-import Tool from '../components/Tool'
-import { ApolloClient, InMemoryCache,useQuery, gql } from '@apollo/client';
-
-const MYPOSTS =  gql`
-query MyQuery {
+const MYPOSTS = gql`
+  query MyQuery {
     posts {
       edges {
         node {
@@ -36,12 +35,11 @@ query MyQuery {
   }
 `;
 
-
 const Tracks = () => {
-const {loading, error, data} = useQuery(MYPOSTS);
-if (loading) return 'Loading...';
-if (error) return `Error! ${error.message}`;
-return <Layout >{JSON.stringify(data)}</Layout>;
+  const { loading, error, data } = useQuery(MYPOSTS);
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+  return <Layout>{JSON.stringify(data)}</Layout>;
 };
 
 export default Tracks;

@@ -1,17 +1,17 @@
-import Header from './Header'
-import Footer from './Footer'
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
-    return (
-      <>
-       <div className="bg-gray-100">
+  return (
+    <>
+      <div className="bg-gray-100">
         <Header />
         <main>{children}</main>
         <Footer />
-        </div>
-        <script
-dangerouslySetInnerHTML={{
-  __html: `
+      </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
   document.addEventListener('DOMContentLoaded', function() {
     const menus = document.querySelectorAll('.navbar-burger');
     const dropdowns = document.querySelectorAll('.navbar-menu');
@@ -27,8 +27,8 @@ dangerouslySetInnerHTML={{
     }
 });
 `,
-}}
-/>
-      </>
-    )
-  }
+        }}
+      />
+    </>
+  );
+}
